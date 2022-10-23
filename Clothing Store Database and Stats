@@ -1,30 +1,31 @@
 --Create a clothing store database
-
-CREATE TABLE store (id INTEGER PRIMARY KEY, item TEXT, size TEXT, price INTEGER, color TEXT);
+CREATE TABLE store (id INTEGER PRIMARY KEY, item TEXT, rating INTEGER, price INTEGER, color TEXT);
 
 INSERT INTO store VALUES
-(1, "pants", "small", 17.99, "blue"),
-(2, "pants", "medium", 18.99, "blue"),
-(3, "pants", "large", 19.99, "blue"),
-(4, "shirt", "small", 12.99, "white"),
-(5, "shirt", "medium", 13.99, "white"),
-(6, "shirt", "large", 14.99, "white"),
-(7, "hoodie", "small", 20.99, "green"),
-(8, "hoodie", "medium", 21.99, "green"),
-(9, "hoodie", "large", 22.99, "green"),
-(10, "dress", "small", 18.99, "yellow"),
-(11, "dress", "medium", 19.99, "yellow"),
-(12, "dress", "large", 20.99, "yellow"),
-(13, "dress", "small", 18.99, "red"),
-(14, "dress", "medium", 19.99, "red"),
-(15, "dress", "large", 20.99, "red");
+(1, "pants", 4.5, 25.99, "blue"),
+(2, "long sleeve shirt", 4, 18.99, "blue"),
+(3, "shorts", "3", 23.99, "blue"),
+(4, "light jacket", 4.5, 19.99, "white"),
+(5, "heavyy jacket", 5, 13.99, "white"),
+(6, "button up shirt",3.5, 14.99, "white"),
+(7, "hoodie", 3.5, 20.99, "green"),
+(8, "socks", 3, 7.99, "green"),
+(9, "tracksuit", 4, 32.99, "green"),
+(10, "dress", 5, 18.99, "yellow"),
+(11, "shirt", 3.5, 13.99, "yellow"),
+(12, "tank top", 4, 12.99, "yellow"),
+(13, "bathing suit", 5, 18.99, "red"),
+(14, "jumpsuit", 3.5, 19.99, "red"),
+(15, "sweater", 3, 20.99, "red");
 
---display the database ordered by price.
+--display the database ordered by price
 SELECT * FROM store
 ORDER BY price;
 
---display the avaliable colors.
-SELECT DISTINCT color FROM store;
-
 --display all the items under $20.00
 SELECT * FROM store WHERE price < 20.00;
+
+--display the items with ratings between 4 and 5 then ordered by the rating from lowest to highest
+SELECT * FROM store
+WHERE rating BETWEEN 4 AND 5 
+ORDER BY rating;
