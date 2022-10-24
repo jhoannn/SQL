@@ -75,4 +75,3 @@ CASE
 END AS contestant_age
 FROM contestants
 ORDER BY contestant_age;
-
