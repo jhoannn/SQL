@@ -1,0 +1,78 @@
+--create table with the contestants from The Mole on Netflix
+CREATE TABLE contestants (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, hometown TEXT);
+
+INSERT INTO contestants VALUES
+(1,"William Richardson", 29, "Henderson, Nevada"),
+(2,"Kesi Neblett", 27, "New York City, New York"),
+(3,"Joi Schweitzer", 40, "Atlanta, Georgia"),
+(4,"Avori Henderson", 26, "Phoenix, Arizona"),
+(5,"Jacob Hacker", 29, "Bloomville, Ohio"),
+(6,"Greg Shapiro", 32, "Seattle, Washington"),
+(7,"Casey Lary", 39, "Chico, California"),
+(8,"Pranav Patel", 29, "Boston, Massachusetts"),
+(9,"Sandy Ronquillo", 26, "Fort Worth, Texas"),
+(10,"Dom Gabriel", 29, "Toronto, Canada"),
+(11,"Samara Joy", 25, "Atlanta, Georgia"),
+(12,"Osei White", 32, "Brooklyn, New York");
+
+--create table about the first mission from The Mole
+CREATE TABLE mission1 (contestant_id INTEGER,team TEXT, successful TEXT);
+
+INSERT INTO mission1 VALUES 
+(1, "Suspended from a tree", "Yes"),
+(4, "Suspended from a tree", "Yes"),
+(10, "Suspended from a tree", "Yes"),
+(2, "Suspended from a tree", "Yes"),
+(3, "Buried underground", "No"),
+(12, "Buried underground", "No"),
+(11, "Buried underground", "No"),
+(9, "Buried underground", "No"),
+(7, "Submerged in a river", "Yes"),
+(6, "Submerged in a river", "Yes"),
+(5, "Submerged in a river", "Yes"),
+(8, "Submerged in a river", "Yes");
+
+--create table about the second mission on The Mole
+CREATE TABLE mission2 (contestant_id INTEGER,team TEXT, successful TEXT);
+
+INSERT INTO mission2 VALUES
+(7, "masterminds", "Yes"),
+(10, "masterminds", "Yes"),
+(6, "Cell block D", "No"),
+(3, "Cell block D", "No"),
+(2, "Cell block D", "No"),
+(4, "Cell block E", "Yes"),
+(11, "Cell block E", "Yes"),
+(1, "Cell block E", "Yes"),
+(5, "Cell block F", "Yes"),
+(8, "Cell block F", "Yes"),
+(9, "Cell block F", "Yes"),
+(12, "NULL", "NULL");
+
+--display the contestants id and name along side their team for mission 1 and mission 2
+SELECT contestants.id, contestants.name, mission1.team AS m1_team, mission2.team AS m2_team
+FROM contestants
+LEFT OUTER JOIN mission1
+ON contestants.id = mission1.contestant_id
+LEFT OUTER JOIN mission2
+ON contestants.id = mission2.contestant_id
+GROUP BY contestants.id;
+
+--display the contestants with the status of the success of the first and second mission
+SELECT name, mission1.successful AS mission1_success, mission2.successful AS mission2_success
+FROM contestants
+JOIN mission1
+ON contestants.id=mission1.contestant_id 
+JOIN mission2
+ON contestants.id=mission2.contestant_id
+GROUP BY contestants.id;
+
+--display contestants by their age if they are older than 30 or younger than 30
+SELECT name,
+CASE 
+    WHEN age >=30 THEN "older than 30"
+    ELSE "younger than 30"
+END AS contestant_age
+FROM contestants
+ORDER BY contestant_age;
+
