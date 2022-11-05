@@ -48,3 +48,13 @@ WHERE artist_name='Olivia Rodrigo'
 SELECT artist_name, track_name, speechiness FROM BIT_DB.Spotifydata
 WHERE speechiness > .1
 ORDER BY speechiness DESC
+
+--Caculated the average popularity for the artist in the Spotify data table. Then, for every artist with an average popularity of 90 or above, showed their name, their average popularity, and labeled them as a "Top Star"--
+WITH popularity_average_CTE AS
+(SELECT artist_name, AVG(popularity) AS average_popularity
+FROM Spotifydata AS S
+GROUP BY s.artist_name)
+
+SELECT artist_name, average_popularity, 'Top Star' AS tag 
+FROM popularity_average_CTE
+WHERE average_popularity >=90
