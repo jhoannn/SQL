@@ -20,7 +20,7 @@ liveness decimal(5,4) NOT NULL,
 valence decimal(4,3) NOT NULL,
 tempo decimal(6,3) NOT NULL,
 duration_ms integer NOT NULL,
-time_signature integer NOT NULL) 
+time_signature integer NOT NULL);
 
 # Then I inserted the Spotify Data .csv into the table.
 
@@ -33,28 +33,28 @@ CASE
     WHEN popularity > 80 < 90 THEN 'popular'
     ELSE 'less popular' 
     END AS 'popularity score'
-FROM BIT_DB.Spotifydata
+FROM BIT_DB.Spotifydata;
 
 --Showed the top 10 longest songs in terms of duration of the song--
 SELECT artist_name, track_name, duration_ms FROM BIT_DB.Spotifydata
 ORDER BY duration_ms DESC
-LIMIT 10
+LIMIT 10;
 
 --Showed the number of times the artist Olivia Rodrigo had a song in the table--
 SELECT artist_name, COUNT(artist_name) FROM BIT_DB.Spotifydata
-WHERE artist_name='Olivia Rodrigo'
+WHERE artist_name='Olivia Rodrigo';
 
 --Showed the songs with the most words spoken--
 SELECT artist_name, track_name, speechiness FROM BIT_DB.Spotifydata
 WHERE speechiness > .1
-ORDER BY speechiness DESC
+ORDER BY speechiness DESC;
 
 --Caculated the average popularity for the artist in the Spotify data table. Then, for every artist with an average popularity of 90 or above, showed their name, their average popularity, and labeled them as a "Top Star"--
 WITH popularity_average_CTE AS
 (SELECT artist_name, AVG(popularity) AS average_popularity
 FROM Spotifydata AS S
-GROUP BY s.artist_name)
+GROUP BY s.artist_name);
 
 SELECT artist_name, average_popularity, 'Top Star' AS tag 
 FROM popularity_average_CTE
-WHERE average_popularity >=90
+WHERE average_popularity >=90;
