@@ -82,7 +82,7 @@ JOIN chinook.employees AS e
 ON c.supportrepid = e.employeeid
 GROUP BY e.firstname;
 
-$14.Which sales agent made the most dollars in sales in 2009?
+#14.Which sales agent made the most dollars in sales in 2009?
 SELECT ROUND(SUM(i.total), 2) AS total_sales, e.firstname,e.lastname
 FROM chinook.customers AS c
 JOIN chinook.invoices AS i
@@ -93,3 +93,14 @@ WHERE i.invoicedate LIKE '2009%'
 GROUP BY e.firstname
 ORDER BY total_sales DESC
 LIMIT 1;
+
+#15.Show the track name, genre, and the playlist name for each distinct track that does not belong to the rock genre.
+SELECT DISTINCT t.name AS track_name, g.name AS genre, p.name AS playlist_name
+FROM chinook.tracks AS t
+JOIN chinook.genres AS g
+ON t.genreid = g.genreid
+JOIN chinook.playlist_track as pt
+ON t.trackid = pt.trackid
+JOIN chinook.playlists AS p
+ON pt.playlistid = p.playlistid
+WHERE g.name NOT LIKE 'rock';
